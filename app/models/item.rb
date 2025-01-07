@@ -4,6 +4,6 @@ class Item < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
-  validates :unit_price, presence: true, numerically: {only_float: true}
-  validates :merchnat_id, presence: true, numerically: {only_integer: true}
+  validates :unit_price, presence: true, numericality: {only_float: true}
+  validates :merchant_id, presence: true, numericality: {only_integer: true}
 end
