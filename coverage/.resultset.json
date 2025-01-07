@@ -1,19 +1,32 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/models/customer_spec.rb": {
+      "/Users/montyp/mod2/little_shop/spec/models/customer_spec.rb": {
         "lines": [
           1,
           null,
           null,
           1,
           1,
-          2,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          0,
+          null,
           null,
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/rails_helper.rb": {
+      "/Users/montyp/mod2/little_shop/spec/rails_helper.rb": {
         "lines": [
           null,
           1,
@@ -94,7 +107,7 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/environment.rb": {
+      "/Users/montyp/mod2/little_shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -103,7 +116,7 @@
           1
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/application.rb": {
+      "/Users/montyp/mod2/little_shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -151,7 +164,7 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/boot.rb": {
+      "/Users/montyp/mod2/little_shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -159,7 +172,7 @@
           1
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/environments/test.rb": {
+      "/Users/montyp/mod2/little_shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -227,7 +240,7 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/initializers/cors.rb": {
+      "/Users/montyp/mod2/little_shop/config/initializers/cors.rb": {
         "lines": [
           null,
           null,
@@ -256,7 +269,7 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/montyp/mod2/little_shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -268,7 +281,7 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/initializers/inflections.rb": {
+      "/Users/montyp/mod2/little_shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -288,7 +301,7 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/config/routes.rb": {
+      "/Users/montyp/mod2/little_shop/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -302,57 +315,8 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/customer.rb": {
+      "/Users/montyp/mod2/little_shop/app/models/customer.rb": {
         "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/models/invoice_item_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/invoice_item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/models/invoice_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/invoice.rb": {
-        "lines": [
-          1,
           1,
           1,
           null,
@@ -361,58 +325,7 @@
           null
         ]
       },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/models/item_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/models/merchant_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/merchant.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/models/transaction_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/transaction.rb": {
+      "/Users/montyp/mod2/little_shop/app/models/application_record.rb": {
         "lines": [
           1,
           1,
@@ -420,6 +333,6 @@
         ]
       }
     },
-    "timestamp": 1736259453
+    "timestamp": 1736280149
   }
 }
