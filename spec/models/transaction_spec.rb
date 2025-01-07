@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Transaction do
+RSpec.describe Transaction, type: :model do
   describe "relationships" do
-    it { should belong_to :invoices }
+    it { should belong_to :invoice }
   end
 end

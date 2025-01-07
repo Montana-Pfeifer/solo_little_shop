@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2025-01-06T20:58:53-07:00">2025-01-06T20:58:53-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2025-01-07T07:17:33-07:00">2025-01-07T07:17:33-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -237,7 +237,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#09e68ebc16ee797bea4e1182f7bc6bab383e0af1" class="src_link" title="spec/models/customer_spec.rb">spec/models/customer_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">7</td>
+            <td class="cell--number">8</td>
             <td class="cell--number">4</td>
             <td class="cell--number">4</td>
             <td class="cell--number">0</td>
@@ -439,7 +439,7 @@
 
             
 
-            <code class="ruby">  has_many :invoice</code>
+            <code class="ruby">  has_many :invoices</code>
           </li>
         </div>
       
@@ -3018,14 +3018,12 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="3">
-            
-              <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="3">
             
 
             
 
-            <code class="ruby">describe Customer do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -3037,24 +3035,36 @@
 
             
 
+            <code class="ruby">RSpec.describe Customer, type: :model do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            
+              <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  describe &quot;relationships&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="5">
+          <li class="covered" data-hits="2" data-linenumber="6">
             
               <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">    it { should have_many :invoice }</code>
+            <code class="ruby">    it { should have_many :invoices }</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="6">
+          <li class="never" data-hits="" data-linenumber="7">
             
 
             
@@ -3064,7 +3074,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="7">
+          <li class="never" data-hits="" data-linenumber="8">
             
 
             
@@ -3134,7 +3144,7 @@
 
             
 
-            <code class="ruby">describe InvoiceItem do</code>
+            <code class="ruby">RSpec.describe InvoiceItem, type: :model do</code>
           </li>
         </div>
       
@@ -3255,7 +3265,7 @@
 
             
 
-            <code class="ruby">describe Invoice do</code>
+            <code class="ruby">RSpec.describe Invoice, type: :model do</code>
           </li>
         </div>
       
@@ -3400,7 +3410,7 @@
 
             
 
-            <code class="ruby">describe Item do</code>
+            <code class="ruby">RSpec.describe Item, type: :model do</code>
           </li>
         </div>
       
@@ -3521,7 +3531,7 @@
 
             
 
-            <code class="ruby">describe Merchant do</code>
+            <code class="ruby">RSpec.describe Merchant, type: :model do</code>
           </li>
         </div>
       
@@ -3642,7 +3652,7 @@
 
             
 
-            <code class="ruby">describe Transaction do</code>
+            <code class="ruby">RSpec.describe Transaction, type: :model do</code>
           </li>
         </div>
       
@@ -3666,7 +3676,7 @@
 
             
 
-            <code class="ruby">    it { should belong_to :invoices }</code>
+            <code class="ruby">    it { should belong_to :invoice }</code>
           </li>
         </div>
       
