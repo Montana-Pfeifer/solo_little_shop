@@ -3,15 +3,16 @@ class ErrorSerializer
     {
       errors: errors.map do |error|
         {
-          status: error[:status].to_s, 
+          status: error[:status].to_s,
           title: error[:title] || "Error",
-          detail: error[:detail]
+          detail: error[:detail],
+          message: error[:message] || "An error occurred"
         }
       end
     }
   end
 
-  def self.format_error(status, detail, title = "Error")
-    format_errors([{ status: status, title: title, detail: detail }])
+  def self.format_error(status, detail, title = "Error", message = "An error occurred")
+    format_errors([{ status: status, title: title, detail: detail, message: message }])
   end
 end
