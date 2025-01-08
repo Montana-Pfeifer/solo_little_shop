@@ -1,13 +1,20 @@
 class Api::V1::MerchantsController < ApplicationController
 
   def index
-    if params[:sorted].present?
-      merchants = Merchant.merchants_by_age()
-    else 
+    if params[:sorted] == 'age'
+      merchants = Merchant.merchants_by_age
+      render json: MerchantSerializer.format_merchants_json(merchants)
+    elsif params[:count] === 'true'
       merchants = Merchant.all
+      render json: MerchantSerializer.format_merchants_count_json(merchants)
+    elsif params[:status] == 'returned'
+      merchants = Merchant.all
+      merchants = Merchant.merchants_with_returns(merchants)
+      render json: MerchantSerializer.format_merchants_json(merchants)
+    else
+      merchants = Merchant.all
+      render json: MerchantSerializer.format_merchants_json(merchants)
     end
-
-    render json: MerchantSerializer.format_merchants_json(merchants)
   end
 
   def show
@@ -24,6 +31,10 @@ class Api::V1::MerchantsController < ApplicationController
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
     render json: MerchantSerializer.format_merchant_json(merchant)
+  end
+
+  def destroy
+    Merchant.find(params[:id]).destroy
   end
 
   private
