@@ -1,72 +1,78 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/nvnatasha/turing_work/2mod.2/little_shop/spec/models/item_spec.rb": {
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/spec/api/v1/items_request_spec.rb": {
         "lines": [
           1,
           null,
           1,
-          null,
           1,
+          null,
           2,
+          null,
           2,
           null,
           null,
-          1,
-          null,
-          1,
-          1,
-          1,
           null,
           null,
           null,
           null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
+          2,
           null,
           null,
           null,
           null,
           null,
-          1,
+          null,
+          2,
           null,
           null,
-          1,
-          1,
-          1,
+          null,
+          null,
+          null,
+          null,
+          2,
+          null,
+          null,
           null,
           null,
           null,
           null,
           null,
           1,
+          1,
           null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
           null,
           1,
           1,
           1,
           null,
-          null,
-          null,
-          null,
-          null,
+          1,
+          1,
+          1,
           1,
           null,
           null,
           1,
           1,
+          null,
+          1,
           1,
           null,
+          1,
           null,
+          1,
+          1,
           null,
-          null,
-          null,
+          1,
+          1,
+          1,
           1,
           null,
           null,
@@ -376,6 +382,25 @@
           null
         ]
       },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/item.rb": {
         "lines": [
           1,
@@ -389,34 +414,93 @@
           null
         ]
       },
-      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/application_record.rb": {
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
-          1,
-          null
-        ]
-      },
-      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/merchant.rb": {
-        "lines": [
+          null,
           1,
           1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
           1,
           null,
           1,
           0,
           null,
+          null,
           null
         ]
       },
-      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/invoice_item.rb": {
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/controllers/application_controller.rb": {
         "lines": [
           1,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/serializers/item_serializer.rb": {
+        "lines": [
           1,
+          null,
           1,
+          null,
+          1,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1736292272
+    "timestamp": 1736298499
   }
 }
