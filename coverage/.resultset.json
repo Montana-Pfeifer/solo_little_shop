@@ -139,6 +139,7 @@
           null,
           null,
           null,
+          null,
           1,
           1,
           null,
@@ -612,8 +613,8 @@
           null,
           null,
           1,
-          1,
           null,
+          1,
           null,
           1,
           1,
@@ -915,8 +916,11 @@
           1,
           null,
           1,
+          null,
           1,
           1,
+          1,
+          null,
           null,
           null,
           1,
@@ -926,11 +930,7 @@
           null,
           1,
           4,
-          2,
           1,
-          null,
-          1,
-          null,
           null,
           null,
           1,
@@ -958,6 +958,8 @@
       "/Users/montyp/mod2/little_shop/app/controllers/application_controller.rb": {
         "lines": [
           1,
+          null,
+          1,
           1,
           1,
           1,
@@ -967,7 +969,7 @@
           1,
           null,
           1,
-          2,
+          4,
           null,
           null,
           1,
@@ -1069,10 +1071,8 @@
           1,
           4,
           null,
-          2,
           1,
           null,
-          1,
           null,
           null,
           null,
@@ -1142,6 +1142,6 @@
         ]
       }
     },
-    "timestamp": 1736331084
+    "timestamp": 1736375333
   }
 }

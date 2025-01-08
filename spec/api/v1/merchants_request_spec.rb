@@ -128,15 +128,15 @@ RSpec.describe "Merchants API", type: :request do
     end
 
     it 'returns a 400 when required parameters are missing' do
+      
       post "/api/v1/merchants", params: { item: { } }
     
-      
       expect(response.status).to eq(400)
       expect(response.body).to include("Bad Request")
-      expect(response.body).to include('Missing required parameter: merchant')
+      expect(response.body).to include('param is missing or the value is empty: merchant')
     end
 
-    it 'returns a 400 bad request for parse errors' do
+    it 'returns a 422 bad request for parse errors' do
       
       post "/api/v1/merchants", 
         params: '{ invalid_json: "malformed }', 

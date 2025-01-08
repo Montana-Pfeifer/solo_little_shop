@@ -130,7 +130,8 @@ RSpec.describe "Items API", type: :request do
           
             expect(response.status).to eq(400)
             expect(response.body).to include("Bad Request")
-            expect(response.body).to include('Missing required parameter: item')
+            expect(response.body).to include('param is missing or the value is empty: item')
+
           end
     end
 
