@@ -5,7 +5,21 @@ RSpec.describe "Merchants API", type: :request do
     @merchant_one = Merchant.create!(name: 'Matt\'s Computer Repair Store')
     @merchant_two = Merchant.create!(name: 'Natasha\'s Taylor Swift Store')
     @merchant_three = Merchant.create!(name: 'Montana\'s Pokemon Cards Store')
-  end
+
+    @customer = Customer.create!(first_name: 'John', last_name: 'Doe')
+
+    @invoice_one = @merchant_one.invoices.create!(
+      customer: @customer,
+      status: 'returned',
+      created_at: '2023-01-01'
+    )
+
+    @invoice_two = @merchant_two.invoices.create!(
+      customer: @customer,
+      status: 'shipped',
+      created_at: '2023-01-02'
+    )
+    end
 
   describe 'GET /api/v1/merchants' do
     it 'fetches all merchants' do
@@ -17,11 +31,51 @@ RSpec.describe "Merchants API", type: :request do
 
       merchants = JSON.parse(response.body, symbolize_names: true)[:data]
 
-      merchant = merchants[0]
-      expect(merchant[:id]).to be_a(String)
-      expect(merchant[:type]).to eq('merchant')
+      expect(merchants.count).to eq(3)
+      expect(merchants[0][:attributes][:name]).to eq(@merchant_one.name)
+      expect(merchants[1][:attributes][:name]).to eq(@merchant_two.name)
+      expect(merchants[2][:attributes][:name]).to eq(@merchant_three.name)
 
-      expect(merchant[:attributes][:name]).to be_a(String)
+      expect(merchants[0][:attributes][:name]).to be_a(String)
+    end
+
+    it 'fetches merchants sorted by age' do
+      get '/api/v1/merchants', params: { sorted: 'age' }
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+      
+      
+      expect(merchants[0][:attributes][:name]).to eq(@merchant_three.name) 
+      expect(merchants[1][:attributes][:name]).to eq(@merchant_two.name) 
+    end
+
+    it 'fetches the total count of merchants' do
+      get '/api/v1/merchants', params: { count: 'true' }
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+      
+      expect(merchants.count).to eq(3)  
+    end
+
+    it 'fetches merchants with returns' do
+      get '/api/v1/merchants', params: { status: 'returned' }
+    
+      expect(response).to be_successful
+    
+      merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+    
+      expect(merchants).to be_an(Array)
+      expect(merchants.size).to eq(1)
+    
+      returned_merchant = merchants.first
+    
+      expect(returned_merchant[:id].to_i).to eq(@merchant_one.id)
     end
   end
 
@@ -40,10 +94,11 @@ RSpec.describe "Merchants API", type: :request do
     expect(merchant[:attributes][:name]).to eq(@merchant_two.name)
   end
 
-  it 'displays a 400 when status is not found' do
+  it 'displays a 404 when record is not found' do
     get "/api/v1/merchants/999999"
 
     expect(response.status).to eq(404)
+    expect(response.body).to include("Record Not Found")
   end
 
   describe 'POST /api/v1/merchants' do
@@ -58,6 +113,34 @@ RSpec.describe "Merchants API", type: :request do
 
       expect(merchant[:id]).to be_a(String)
       expect(merchant[:attributes][:name]).to eq("Mean Joe Bean's Wu-Tang Store")
+    end
+
+    it 'returns a 422 when validation fails' do
+      post "/api/v1/merchants", params: { merchant: { name: ""} }
+    
+      
+      expect(response.status).to eq(422)
+      expect(response.body).to include("Name can't be blank")
+    end
+
+    it 'returns a 400 when required parameters are missing' do
+      post "/api/v1/merchants", params: { item: { } }
+    
+      
+      expect(response.status).to eq(400)
+      expect(response.body).to include("Bad Request")
+      expect(response.body).to include('Missing required parameter: merchant')
+    end
+
+    it 'returns a 400 bad request for parse errors' do
+      
+      post "/api/v1/merchants", 
+        params: '{ invalid_json: "malformed }', 
+        headers: { 'Content-Type' => 'application/json' }
+      
+      expect(response.status).to eq(400)
+      expect(response.body).to include('Bad Request')
+      expect(response.body).to include('Error occurred while parsing request parameters')
     end
   end
 
@@ -75,6 +158,19 @@ RSpec.describe "Merchants API", type: :request do
 
       expect(merchant.name).to_not eq(current_store_name)
       expect(merchant.name).to eq("Montana's Collectables")
+    end
+
+    it 'returns error when validation fails' do
+      patch "/api/v1/merchants/#{@merchant_three.id}", params: { merchant: { name: '' } }
+  
+      expect(response.status).to eq(422)
+      error_response = JSON.parse(response.body, symbolize_names: true)
+      expect(error_response[:errors]).to include(
+        {:detail => "Name can't be blank",
+          :message => "An error occurred",
+          :status => "422",
+          :title => "Validation Error"}
+        )
     end
   end
 
