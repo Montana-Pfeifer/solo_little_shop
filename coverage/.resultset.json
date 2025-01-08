@@ -1,15 +1,50 @@
 {
   "RSpec": {
     "coverage": {
+
       "/Users/mhaefling/Turing/Mod2/projects/little_shop/spec/api/v1/merchants_request_spec.rb": {
+
         "lines": [
           1,
           null,
           1,
           1,
+
           5,
           5,
           5,
+
+          null,
+          4,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+
           null,
           null,
           1,
@@ -19,45 +54,72 @@
           null,
           1,
           1,
+
           null,
           1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
+
           null,
           1,
           1,
           1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
+
+
           null,
           1,
           null,
           1,
           1,
           null,
+
+          null,
+          1,
+          1,
+
+
+          null,
+          1,
+          1,
+          null,
+         
+          1,
+          1,
+          1,
+
+         
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           1,
@@ -382,7 +444,14 @@
           1,
           1,
           1,
+          null,
+          null,
           1,
+          1,
+          1,
+          1,
+          1,
+          null,
           null,
           1,
           1,
@@ -426,7 +495,9 @@
           null
         ]
       },
+
       "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/controllers/api/v1/merchants_controller.rb": {
+
         "lines": [
           1,
           null,
@@ -449,9 +520,11 @@
           null,
           1,
           1,
+
           1,
           null,
           null,
+
           1,
           1,
           1,
@@ -474,7 +547,9 @@
           null
         ]
       },
+
       "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/controllers/application_controller.rb": {
+
         "lines": [
           1,
           null
@@ -485,6 +560,7 @@
           1,
           1,
           null,
+
           6,
           null,
           null,
@@ -524,9 +600,49 @@
         ]
       },
       "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/invoice.rb": {
+
         "lines": [
           1,
+          null,
           1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/controllers/application_controller.rb": {
+        "lines": [
           1,
           null,
           1,
@@ -534,20 +650,43 @@
           null
         ]
       },
+
       "/Users/mhaefling/Turing/Mod2/projects/little_shop/app/models/item.rb": {
+
         "lines": [
-          1,
-          1,
           1,
           null,
           1,
+          null,
+          1,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+
           1,
           1,
           1,
+          1,
+
           null
         ]
       }
     },
+
     "timestamp": 1736306370
+
   }
 }
