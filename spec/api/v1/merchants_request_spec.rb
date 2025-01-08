@@ -40,16 +40,20 @@ RSpec.describe "Merchants API", type: :request do
     end
 
     it 'fetches merchants sorted by age' do
+      
       get '/api/v1/merchants', params: { sorted: 'age' }
-
+  
+      
       expect(response).to be_successful
       expect(response.status).to eq(200)
-
+  
+      
       merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+  
       
-      
-      expect(merchants[0][:attributes][:name]).to eq(@merchant_three.name) 
-      expect(merchants[1][:attributes][:name]).to eq(@merchant_two.name) 
+      expect(merchants[0][:attributes][:name]).to eq(@merchant_three.name)  
+      expect(merchants[1][:attributes][:name]).to eq(@merchant_two.name)
+      expect(merchants[2][:attributes][:name]).to eq(@merchant_one.name)  
     end
 
     it 'fetches the total count of merchants' do
