@@ -12,10 +12,9 @@ RSpec.describe Customer, type: :model do
 
     end
     
-    it "shows an error when customer isn't valid" do
-      customer = Customer.create!(first_name: "", last_name: "Smith")
-
-      expect(customer.first_name?).to be(false)
+    it 'shows an error when customer isnt valid' do  
+      expect { customer = Customer.create!(first_name: "", last_name: "Smith") 
+        }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: First name can't be blank")
     end
   end
 end
