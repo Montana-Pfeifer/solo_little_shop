@@ -11,10 +11,13 @@ class Api::V1::ItemsController < ApplicationController
     end
 
     def create
-
-        item = Item.create!(item_params)
-        render json: ItemSerializer.format_item(item), status: :created
-    end
+    item = Item.create(item_params)
+        if item.valid?
+            render json: ItemSerializer.format_item(item), status: :created
+        else
+            render json: ErrorSerializer.format_error(422, item.errors.full_messages.join(", "), "Validation Error"), status: :unprocessable_entity
+        end
+  end
 
     def update
         item = Item.find(params[:id])
