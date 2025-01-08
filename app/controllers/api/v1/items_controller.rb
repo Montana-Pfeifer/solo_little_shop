@@ -12,12 +12,8 @@ class Api::V1::ItemsController < ApplicationController
 
     def create
 
-        if missing_item_params?
-            return render_bad_request("There cannot be any blank values.")
-        end
-
         item = Item.create!(item_params)
-        render json: ItemSerializer.format_item(item)
+        render json: ItemSerializer.format_item(item), status: :created
     end
 
     def update

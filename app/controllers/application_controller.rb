@@ -5,9 +5,12 @@ class ApplicationController < ActionController::API
   rescue_from ActionDispatch::Http::Parameters::ParseError, with: :bad_request_parse_error
 
   private
+  def missing_merchant_params?
+    params[:merchant].nil? || params[:merchant][:name].blank?
+  end
 
   def missing_item_params?
-    params[:item].nil? || params[:item][:name].blank? || params[:item][:price].blank? || params[:item][:description].blank?
+    params[:item].nil? || params[:item][:name].blank? || params[:item][:description].blank? || params[:item][:unit_price].blank? || params[:item][:merchant_id].blank?
   end
 
   def record_not_found(exception)
@@ -16,6 +19,10 @@ class ApplicationController < ActionController::API
 
   def record_invalid(exception)
     render json: ErrorSerializer.format_error(422, exception.record.errors.full_messages.join(", "), "Validation Error"), status: :unprocessable_entity
+  end
+
+  def parameter_missing(exception)
+    render json: ErrorSerializer.format_error(400, "Missing required parameter: #{exception.param}", "Bad Request"), status: :bad_request
   end
 
   def render_bad_request(exception)
