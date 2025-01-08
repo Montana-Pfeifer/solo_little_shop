@@ -70,6 +70,13 @@ RSpec.describe "Items API", type: :request do
             expect(item[:attributes][:unit_price]).to eq(@item1.unit_price)
             expect(item[:attributes][:merchant_id]).to eq(@item1.merchant_id)
         end
+
+        it 'displays a 404 when record is not found' do
+            get "/api/v1/items/999999"
+        
+            expect(response.status).to eq(404)
+            expect(response.body).to include("Record Not Found")
+        end
     end
 
     describe 'POST /api/v1/items' do
@@ -92,6 +99,39 @@ RSpec.describe "Items API", type: :request do
             expect(item[:unit_price]).to eq(65.00)
             expect(item[:merchant_id]).to eq(@merchant.id)
         end
+
+        it 'returns a 422 when required parameters are missing' do
+            new_item = {
+              name: "",
+              description: "It's me, hi, I'm the problem, it's me",
+              unit_price: 65.00,
+              merchant_id: @merchant.id
+            }
+          
+            post "/api/v1/items", params: { item: new_item }
+          
+            expect(response.status).to eq(422)
+            expect(response.body).to include("Name can't be blank")
+          end
+
+          it 'returns a 400 bad request for parse errors' do
+      
+            post "/api/v1/items", 
+              params: '{ invalid_json: "malformed }', 
+              headers: { 'Content-Type' => 'application/json' }
+            
+            expect(response.status).to eq(400)
+            expect(response.body).to include('Bad Request')
+            expect(response.body).to include('Error occurred while parsing request parameters')
+          end
+
+          it 'returns a 400 when required parameters are missing' do
+            post "/api/v1/items", params: { item: { } }
+          
+            expect(response.status).to eq(400)
+            expect(response.body).to include("Bad Request")
+            expect(response.body).to include('Missing required parameter: item')
+          end
     end
 
     describe 'PATCH /api/v1/items/:id'do
@@ -114,6 +154,18 @@ RSpec.describe "Items API", type: :request do
             expect(item.description).to eq("I'm on my Vigilante Shit again")
             expect(item.unit_price).to eq(70.00)
 
+        end
+    end
+
+    describe 'DELETE /api/v1/items/:id' do
+        it 'can delete an existing item' do
+          
+          items = Item.all
+          expect(items.count).to eq(4)
+    
+          delete "/api/v1/items/#{@item1.id}"
+    
+          expect(items.count).to eq(3)
         end
     end
         
