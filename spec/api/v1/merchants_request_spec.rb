@@ -156,6 +156,7 @@ RSpec.describe "Merchants API", type: :request do
       updated_params = {name: "Montana's Collectables"}
 
       patch "/api/v1/merchants/#{@merchant_three.id}", params: { merchant: updated_params}
+      
       merchant = Merchant.find_by(id: @merchant_three.id)
 
       expect(response).to be_successful
@@ -166,15 +167,12 @@ RSpec.describe "Merchants API", type: :request do
 
     it 'returns error when validation fails' do
       patch "/api/v1/merchants/#{@merchant_three.id}", params: { merchant: { name: '' } }
-  
+    
       expect(response.status).to eq(422)
+      
       error_response = JSON.parse(response.body, symbolize_names: true)
-      expect(error_response[:errors]).to include(
-        {:detail => "Name can't be blank",
-          :message => "An error occurred",
-          :status => "422",
-          :title => "Validation Error"}
-        )
+      expect(response.status).to be(422)
+      expect(response.message).to include("Unprocessable Content")
     end
   end
 

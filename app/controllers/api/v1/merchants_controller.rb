@@ -23,19 +23,13 @@ class Api::V1::MerchantsController < ApplicationController
 
   def create
     new_merchant = Merchant.create!(merchant_params)
-    
-      render json: MerchantSerializer.format_merchant_json(new_merchant), status: :created
-    # else
-    #   render json: ErrorSerializer.format_error(422, new_merchant.errors.full_messages.join(", "), "Validation Error"), status: :unprocessable_entity
+    render json: MerchantSerializer.format_merchant_json(new_merchant), status: :created 
   end
 
   def update
     merchant = Merchant.find(params[:id])
-      if merchant.update(merchant_params)
-        render json: MerchantSerializer.format_merchant_json(merchant)
-      else
-        render json: ErrorSerializer.format_error(422, merchant.errors.full_messages.join(", "), "Validation Error"), status: :unprocessable_entity
-    end
+    merchant.update!(merchant_params)
+    render json: MerchantSerializer.format_merchant_json(merchant)
   end
 
   def destroy
