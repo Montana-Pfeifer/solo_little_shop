@@ -1,8 +1,11 @@
+require 'pry'
+
 class Api::V1::ItemsController < ApplicationController
 
     def index
         items = Item.all 
         render json: ItemSerializer.format_items(items)
+        
     end
 
     def show
@@ -12,12 +15,12 @@ class Api::V1::ItemsController < ApplicationController
 
     def create
         item = Item.create!(item_params)
-        render json: ItemSerializer.format_item(item)
+        render json: ItemSerializer.format_item(item), status: :created
     end
 
     def update
         item = Item.find(params[:id])
-        item.update(item_params)
+        item.update!(item_params)
         render json: ItemSerializer.format_item(item)
     end
 

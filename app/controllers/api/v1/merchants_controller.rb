@@ -8,9 +8,8 @@ class Api::V1::MerchantsController < ApplicationController
       merchants = Merchant.all
       render json: MerchantSerializer.format_merchants_count_json(merchants)
     elsif params[:status] == 'returned'
-      merchants = Merchant.all
-      merchants = Merchant.merchants_with_returns(merchants)
-      render json: MerchantSerializer.format_merchants_json(merchants)
+        merchants = Merchant.merchants_with_returns 
+        render json: MerchantSerializer.format_merchants_json(merchants)
     else
       merchants = Merchant.all
       render json: MerchantSerializer.format_merchants_json(merchants)
@@ -19,17 +18,17 @@ class Api::V1::MerchantsController < ApplicationController
 
   def show
     merchant = Merchant.find(params[:id])
-    render json: MerchantSerializer.format_merchant_json(merchant)
+    render json: MerchantSerializer.format_merchant_json(merchant)    
   end
 
   def create
-    new_merchant = Merchant.create(merchant_params)
-    render json: MerchantSerializer.format_merchant_json(new_merchant)
+    new_merchant = Merchant.create!(merchant_params)
+    render json: MerchantSerializer.format_merchant_json(new_merchant), status: :created 
   end
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
+    merchant.update!(merchant_params)
     render json: MerchantSerializer.format_merchant_json(merchant)
   end
 
@@ -37,6 +36,8 @@ class Api::V1::MerchantsController < ApplicationController
     Merchant.find(params[:id]).destroy
   end
 
+  private
+  
   def merchant_params
     params.require(:merchant).permit(:name)
   end
