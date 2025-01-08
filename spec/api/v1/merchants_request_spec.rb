@@ -40,6 +40,12 @@ RSpec.describe "Merchants API", type: :request do
     expect(merchant[:attributes][:name]).to eq(@merchant_two.name)
   end
 
+  it 'displays a 400 when status is not found' do
+    get "/api/v1/merchants/999999"
+
+    expect(response.status).to eq(404)
+  end
+
   describe 'POST /api/v1/merchants' do
     it 'can create a merchant' do
 
