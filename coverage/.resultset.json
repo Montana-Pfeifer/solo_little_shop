@@ -2,16 +2,21 @@
   "RSpec": {
     "coverage": {
 <<<<<<< HEAD
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/spec/models/customer_spec.rb": {
 =======
       "/Users/nvnatasha/turing_work/2mod.2/little_shop/spec/models/item_spec.rb": {
 >>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/spec/api/v1/items_request_spec.rb": {
+>>>>>>> 751d874c7023982e77cd5136b55aa4c27663674b
         "lines": [
           1,
           null,
           1,
           1,
 <<<<<<< HEAD
+<<<<<<< HEAD
           null,
           1,
           1,
@@ -20,8 +25,72 @@
 =======
           2,
           2,
+=======
+          null,
+          4,
+          null,
+          4,
+>>>>>>> 751d874c7023982e77cd5136b55aa4c27663674b
           null,
           null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
           1,
           1,
 >>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
@@ -29,6 +98,7 @@
           null,
           null,
           null,
+<<<<<<< HEAD
 <<<<<<< HEAD
           1,
           1,
@@ -42,20 +112,49 @@
           0,
           null,
           null,
+=======
+>>>>>>> 751d874c7023982e77cd5136b55aa4c27663674b
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
           1,
           1,
           null,
           null,
           null,
+          1,
+          1,
+          null,
+          1,
           null,
           null,
-          0,
+          1,
+          null,
+          null,
           null,
           null,
           1,
           1,
           null,
-          null,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           null,
@@ -408,8 +507,34 @@
           1,
           1,
           1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
           1,
           null,
+          null,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
           null
         ]
       },
@@ -426,18 +551,61 @@
           null
         ]
       },
-      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/application_record.rb": {
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/controllers/application_controller.rb": {
+        "lines": [
           1,
           null
         ]
       },
-      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/merchant.rb": {
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/serializers/item_serializer.rb": {
         "lines": [
           1,
+          null,
           1,
+          null,
           1,
+<<<<<<< HEAD
           null
         ]
       },
@@ -446,15 +614,49 @@
           1,
 >>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
           1,
+=======
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+>>>>>>> 751d874c7023982e77cd5136b55aa4c27663674b
           1,
+          null,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "timestamp": 1736280149
 =======
     "timestamp": 1736283502
 >>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
+=======
+    "timestamp": 1736301529
+>>>>>>> 751d874c7023982e77cd5136b55aa4c27663674b
   }
 }
