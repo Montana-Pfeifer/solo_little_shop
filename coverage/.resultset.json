@@ -1,32 +1,74 @@
 {
   "RSpec": {
     "coverage": {
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/spec/models/customer_spec.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/spec/models/item_spec.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           1,
           null,
+          1,
+          1,
+<<<<<<< HEAD
           null,
           1,
           1,
           null,
           1,
+=======
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
           1,
           null,
-          1,
-          1,
           null,
           null,
-          null,
+<<<<<<< HEAD
           1,
           1,
           null,
           0,
           null,
+=======
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
           null,
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/spec/rails_helper.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/spec/rails_helper.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           null,
           1,
@@ -107,7 +149,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/environment.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/environment.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           null,
           1,
@@ -116,7 +162,11 @@
           1
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/application.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/application.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           1,
           null,
@@ -164,7 +214,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/boot.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/boot.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           1,
           null,
@@ -172,7 +226,11 @@
           1
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/environments/test.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/environments/test.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           1,
           null,
@@ -240,7 +298,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/initializers/cors.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/initializers/cors.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           null,
           null,
@@ -269,7 +331,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/initializers/filter_parameter_logging.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/initializers/filter_parameter_logging.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           null,
           null,
@@ -281,7 +347,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/initializers/inflections.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/initializers/inflections.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           null,
           null,
@@ -301,7 +371,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/Users/montyp/mod2/little_shop/config/routes.rb": {
+=======
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/config/routes.rb": {
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
         "lines": [
           1,
           null,
@@ -312,6 +386,7 @@
           null,
           null,
           null,
+<<<<<<< HEAD
           null
         ]
       },
@@ -327,12 +402,59 @@
       },
       "/Users/montyp/mod2/little_shop/app/models/application_record.rb": {
         "lines": [
+=======
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nvnatasha/turing_work/2mod.2/little_shop/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
           1,
           1,
           null
         ]
       }
     },
+<<<<<<< HEAD
     "timestamp": 1736280149
+=======
+    "timestamp": 1736283502
+>>>>>>> 0bf8b6a35f6320681eeb194ec25711d1f0814ad7
   }
 }
