@@ -8,9 +8,8 @@ class Api::V1::MerchantsController < ApplicationController
       merchants = Merchant.all
       render json: MerchantSerializer.format_merchants_count_json(merchants)
     elsif params[:status] == 'returned'
-      merchants = Merchant.all
-      merchants = Merchant.merchants_with_returns(merchants)
-      render json: MerchantSerializer.format_merchants_json(merchants)
+        merchants = Merchant.merchants_with_returns 
+        render json: MerchantSerializer.format_merchants_json(merchants)
     else
       merchants = Merchant.all
       render json: MerchantSerializer.format_merchants_json(merchants)
@@ -24,13 +23,21 @@ class Api::V1::MerchantsController < ApplicationController
 
   def create
     new_merchant = Merchant.create(merchant_params)
-    render json: MerchantSerializer.format_merchant_json(new_merchant), status: :created
+    
+    if new_merchant.valid?
+      render json: MerchantSerializer.format_merchant_json(new_merchant), status: :created
+    else
+      render json: ErrorSerializer.format_error(422, new_merchant.errors.full_messages.join(", "), "Validation Error"), status: :unprocessable_entity
+    end
   end
 
   def update
     merchant = Merchant.find(params[:id])
-    merchant.update(merchant_params)
-    render json: MerchantSerializer.format_merchant_json(merchant)
+      if merchant.update(merchant_params)
+        render json: MerchantSerializer.format_merchant_json(merchant)
+      else
+        render json: ErrorSerializer.format_error(422, merchant.errors.full_messages.join(", "), "Validation Error"), status: :unprocessable_entity
+    end
   end
 
   def destroy
