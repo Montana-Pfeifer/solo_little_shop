@@ -4,12 +4,12 @@ class Api::V1::MerchantsController < ApplicationController
     if params[:sorted] == 'age'
       merchants = Merchant.merchants_by_age
       render json: MerchantSerializer.format_merchants_json(merchants)
-    elsif params[:count] === 'true'
+    elsif params[:count] == 'true'
       merchants = Merchant.all
       render json: MerchantSerializer.format_merchants_count_json(merchants)
     elsif params[:status] == 'returned'
-        merchants = Merchant.merchants_with_returns 
-        render json: MerchantSerializer.format_merchants_json(merchants)
+      merchants = Merchant.merchants_with_returns 
+      render json: MerchantSerializer.format_merchants_json(merchants)
     else
       merchants = Merchant.all
       render json: MerchantSerializer.format_merchants_json(merchants)
