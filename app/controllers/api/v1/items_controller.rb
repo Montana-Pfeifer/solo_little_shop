@@ -3,9 +3,13 @@ require 'pry'
 class Api::V1::ItemsController < ApplicationController
 
     def index
+        if params[:sorted] == "unit_price"
+            items = Item.sort_by_price
+            render json:ItemSerializer.format_items(items)
+        else
         items = Item.all 
         render json: ItemSerializer.format_items(items)
-        
+        end
     end
 
     def show
