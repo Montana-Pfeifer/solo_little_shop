@@ -11,4 +11,12 @@ class Merchant < ApplicationRecord
   def self.merchants_with_returns
     joins(:invoices).where(invoices: { status: 'returned' }).distinct
   end
+
+  def self.fetch_all_items(merchantData)
+    Item.where(merchant_id: merchantData.id)
+  end
+
+  def self.find_by_name(name)
+    where('name ILIKE ?', "%#{name}%")
+  end
 end

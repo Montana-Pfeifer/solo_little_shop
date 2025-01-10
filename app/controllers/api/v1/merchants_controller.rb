@@ -35,6 +35,11 @@ class Api::V1::MerchantsController < ApplicationController
   def destroy
     Merchant.find(params[:id]).destroy
   end
+   
+  def find
+    merchants = Merchant.find_by_name(params[:name])
+    render json: MerchantSerializer.format_merchant_json(merchants.first)
+  end
 
   private
   

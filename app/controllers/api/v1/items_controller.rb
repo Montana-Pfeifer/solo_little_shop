@@ -29,7 +29,17 @@ class Api::V1::ItemsController < ApplicationController
         item.destroy
     end
 
-
+    def find_all
+        if params[:name]
+            items = Item.find_by_name(params[:name])
+        else params[:min_price] || params[:max_price]
+            items = Item.find_by_price(params)
+        end
+        
+        if items.any?
+            render json: ItemSerializer.format_items(items)
+        end
+    end
 
     private
 
