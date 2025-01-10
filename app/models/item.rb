@@ -23,3 +23,12 @@ class Item < ApplicationRecord
     end
   end
 end
+  def self.sort_by_price()
+    Item.order(:unit_price)
+  end
+
+  def self.fetch_merchant(item)
+    Merchant.find(item.merchant_id)
+  end
+
+end

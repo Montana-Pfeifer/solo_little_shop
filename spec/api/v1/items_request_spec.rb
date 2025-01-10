@@ -6,7 +6,7 @@ RSpec.describe "Items API", type: :request do
         @merchant = Merchant.create!(name: 'Taylor Swift Store')
 
         @item1 = Item.create!(
-            name: "TTDP sweater",
+            name: "TTPD sweater",
             description: "I cry a lot but I am so productive",
             unit_price: 65.00,
             merchant_id: @merchant.id
@@ -52,6 +52,21 @@ RSpec.describe "Items API", type: :request do
             expect(item[:attributes][:description]).to be_a(String)
             expect(item[:attributes][:unit_price]).to be_a(Float)
             expect(item[:attributes][:merchant_id]).to be_an(Integer)
+        end
+
+        it 'can sort all items by price (low to high)' do
+
+            get '/api/v1/items', params: { sorted: 'unit_price'}
+
+            expect(response).to be_successful
+            expect(response.status).to eq(200)
+
+            items = JSON.parse(response.body, symbolize_names: true)[:data]
+
+            expect(items[0][:attributes][:name]).to eq("Evermore tee")
+            expect(items[1][:attributes][:name]).to eq("Rep ring")
+            expect(items[2][:attributes][:name]).to eq("TTPD sweater")
+            expect(items[3][:attributes][:name]).to eq("TTPD sweatpants")
         end
 
         it 'fetches a single item' do
@@ -102,37 +117,37 @@ RSpec.describe "Items API", type: :request do
 
         it 'returns a 422 when required parameters are missing' do
             new_item = {
-              name: "",
-              description: "It's me, hi, I'm the problem, it's me",
-              unit_price: 65.00,
-              merchant_id: @merchant.id
+            name: "",
+            description: "It's me, hi, I'm the problem, it's me",
+            unit_price: 65.00,
+            merchant_id: @merchant.id
             }
-          
+        
             post "/api/v1/items", params: { item: new_item }
-          
+        
             expect(response.status).to eq(422)
             expect(response.body).to include("Name can't be blank")
-          end
+        end
 
-          it 'returns a 400 bad request for parse errors' do
-      
+        it 'returns a 400 bad request for parse errors' do
+    
             post "/api/v1/items", 
-              params: '{ invalid_json: "malformed }', 
-              headers: { 'Content-Type' => 'application/json' }
+            params: '{ invalid_json: "malformed }', 
+            headers: { 'Content-Type' => 'application/json' }
             
             expect(response.status).to eq(400)
             expect(response.body).to include('Bad Request')
             expect(response.body).to include('Error occurred while parsing request parameters')
-          end
+        end
 
-          it 'returns a 400 when required parameters are missing' do
+        it 'returns a 400 when required parameters are missing' do
             post "/api/v1/items", params: { item: { } }
-          
+        
             expect(response.status).to eq(400)
             expect(response.body).to include("Bad Request")
             expect(response.body).to include('param is missing or the value is empty: item')
 
-          end
+        end
     end
 
     describe 'PATCH /api/v1/items/:id'do
@@ -160,13 +175,13 @@ RSpec.describe "Items API", type: :request do
 
     describe 'DELETE /api/v1/items/:id' do
         it 'can delete an existing item' do
-          
-          items = Item.all
-          expect(items.count).to eq(4)
+        
+            items = Item.all
+            expect(items.count).to eq(4)
     
-          delete "/api/v1/items/#{@item1.id}"
+            delete "/api/v1/items/#{@item1.id}"
     
-          expect(items.count).to eq(3)
+            expect(items.count).to eq(3)
         end
     end
         
