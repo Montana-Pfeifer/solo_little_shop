@@ -56,7 +56,7 @@ RSpec.describe "Items API", type: :request do
 
         it 'can sort all items by price (low to high)' do
 
-            get '/api/v1/items', params: { sorted: 'unit_price'}
+            get '/api/v1/items', params: { sorted: 'price'}
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
