@@ -22,7 +22,7 @@ class Item < ApplicationRecord
       none
     end
   end
-end
+
   def self.sort_by_price()
     Item.order(:unit_price)
   end
