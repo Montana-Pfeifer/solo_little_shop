@@ -12,17 +12,21 @@ class Item < ApplicationRecord
   end
 
   def self.find_by_price(params)
-    if params[:min_price] && params[:max_price]
-      where('unit_price >= ? AND unit_price <= ?', params[:min_price], params[:max_price])
-    elsif params[:min_price]
-      where('unit_price >= ?', params[:min_price])
-    elsif params[:max_price]
-      where('unit_price <= ?', params[:max_price])
-    else
-      none
+    scope = all
+  
+    if params[:min_price].present?
+      min_price = params[:min_price].to_f
+      scope = scope.where('unit_price >= ?', min_price)
     end
-  end
-
+  
+    if params[:max_price].present?
+      max_price = params[:max_price].to_f
+      scope = scope.where('unit_price <= ?', max_price)
+    end
+  
+    scope
+  end  
+  
   def self.sort_by_price()
     Item.order(:unit_price)
   end
