@@ -1,0 +1,3 @@
+class InvalidPriceError < StandardError
+  
+end
