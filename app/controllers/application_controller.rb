@@ -4,6 +4,8 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from InvalidPriceError, with: :handle_invalid_price_params
+  rescue_from InvalidPriceParamsError, with: :handle_invalid_price_params
+
 
   private
 
@@ -19,10 +21,6 @@ class ApplicationController < ActionController::API
     render json: ErrorSerializer.format_error(422, exception.message, "Unprocessable_entity"), status: :unprocessable_entity
   end
 
-  def handle_invalid_price_params(exception)
-    render json: ErrorSerializer.format_error(400, exception.message, "Invalid Price Range"), status: :bad_request
-  end
-
   def validate_price_params
     if params[:max_price].present?
       max_price = params[:max_price].to_f
@@ -33,5 +31,9 @@ class ApplicationController < ActionController::API
       min_price = params[:min_price].to_f
       raise InvalidPriceError, "min_price must be greater than or equal to 0." if min_price < 0
     end
+  end
+
+  def handle_invalid_price_params(exception)
+    render json: ErrorSerializer.format_error(400, exception.message, "Invalid Price Range"), status: :bad_request
   end
 end
