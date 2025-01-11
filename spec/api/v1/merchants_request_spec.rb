@@ -187,4 +187,30 @@ RSpec.describe "Merchants API", type: :request do
       expect(merchants.count).to eq(2)
     end
   end
+
+  describe 'GET /api/v1/merchants/find' do
+    it 'returns the merchant data when found' do
+     
+      get '/api/v1/merchants/find', params: { name: 'Matt\'s Computer Repair Store' }
+  
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+  
+      json_response = JSON.parse(response.body, symbolize_names: true)
+  
+      expect(json_response[:data][:id].to_i).to eq(@merchant_one.id)
+      expect(json_response[:data][:attributes][:name]).to eq('Matt\'s Computer Repair Store')
+    end
+  
+    it 'returns an empty object when no merchant is found' do
+      get '/api/v1/merchants/find', params: { name: 'Nonexistent Merchant' }
+  
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+  
+      json_response = JSON.parse(response.body, symbolize_names: true)
+  
+      expect(json_response[:data]).to eq({})
+    end
+  end
 end
