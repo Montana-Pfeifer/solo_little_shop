@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   validates :merchant_id, presence: true, numericality: {only_integer: true}
 
   def self.sort_by_price()
-    Item.order(:unit_price)
+      Item.order(:unit_price)
   end
 
   def self.fetch_merchant(item)
