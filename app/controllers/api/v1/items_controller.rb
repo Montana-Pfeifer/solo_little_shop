@@ -1,4 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
+    before_action :validate_price_params, only: [:find_all]
 
     def index
         if params[:sorted] == "unit_price"
@@ -32,15 +33,19 @@ class Api::V1::ItemsController < ApplicationController
     end
 
     def find_all
-        if params[:name]
-            items = Item.find_by_name(params[:name])
-        else params[:min_price] || params[:max_price]
-            items = Item.find_by_price(params)
+        if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
+          return render json: { error: 'Cannot search by name and price range simultaneously' }, status: :bad_request
         end
-        
-        if items.any?
-            render json: ItemSerializer.format_items(items)
-        end
+    
+        items = if params[:name].present?
+                  Item.find_by_name(params[:name])
+                elsif params[:min_price].present? || params[:max_price].present?
+                  Item.find_by_price(params)
+                else
+                  Item.all
+                end
+    
+        render json: ItemSerializer.format_items(items), status: :ok
     end
 
     private
