@@ -15,4 +15,8 @@ class Merchant < ApplicationRecord
   def self.fetch_all_items(merchant_data)
     Item.where(merchant_id: merchant_data.id)
   end
+
+  def self.find_by_name(name)
+    where('name ILIKE ?', "%#{name}%")
+  end
 end

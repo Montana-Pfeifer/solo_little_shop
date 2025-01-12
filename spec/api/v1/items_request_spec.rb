@@ -184,5 +184,58 @@ RSpec.describe "Items API", type: :request do
             expect(items.count).to eq(3)
         end
     end
+    
+    describe '.find_all' do
+        it 'returns items filtered by name' do
+            get '/api/v1/items/find_all', params: { name: 'tTPd' }
+
+    
+            expect(response).to be_successful
+            expect(response.status).to eq(200)
+    
+            items = JSON.parse(response.body, symbolize_names: true)[:data]
+            expect(items.count).to eq(2)
+            expect(items[0][:attributes][:name]).to eq('TTPD sweater')
+        end
+  
+        it 'filters items by price range correctly' do
+            get '/api/v1/items/find_all', params: { min_price: 50, max_price: 70 }
+          
+            expect(response).to be_successful
+            items = JSON.parse(response.body, symbolize_names: true)[:data]
+            prices = items.map { |item| item[:attributes][:unit_price] }
+          
+            expect(prices).to all(be_between(50, 70))
+            expect(prices).to include(50.0, 70.0)
+            expect(prices).not_to include(35.0, 100.0)
+          end
+          
         
+                
+    
+        it 'returns error if name and price range are provided' do
+            get '/api/v1/items/find_all', params: { name: 'widget', min_price: 50 }
+          
+            expect(response.status).to eq(400)
+            expect(response.body).to include('Cannot search by name and price range simultaneously')
+        end
+    
+        it 'returns error for invalid price format' do
+            get '/api/v1/items/find_all', params: { min_price: 'abc', max_price: 50 }
+          
+            expect(response.status).to eq(400)
+            expect(response.body).to include('Price must be a valid number')
+        end
+          
+    
+        it 'returns all items when no parameters are passed' do
+            get '/api/v1/items/find_all', params: { }
+    
+            expect(response).to be_successful
+            expect(response.status).to eq(200)
+    
+            items = JSON.parse(response.body, symbolize_names: true)[:data]
+            expect(items.count).to eq(4)
+        end
+    end
 end

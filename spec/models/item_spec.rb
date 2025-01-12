@@ -125,4 +125,53 @@ RSpec.describe Item, type: :model do
       expect(result3).to eq(@merchant)
     end
   end
+
+  describe '.find_by_name' do
+    it 'finds items matching the name fragment' do
+      result = Item.find_by_name('TTPD')
+      expect(result).to include(@item1, @item2)
+      expect(result).not_to include(@item3, @item4, @item5)
+    end
+
+    it 'is case-insensitive' do
+      result = Item.find_by_name('ttpd')
+      expect(result).to include(@item1, @item2)
+    end
+
+    it 'returns an empty array if no match is found' do
+      result = Item.find_by_name('bracelet')
+      expect(result).to be_empty
+    end
+  end
+
+  describe '.find_by_price' do
+    
+    it 'returns items within the price range' do
+      result = Item.find_by_price(min_price: 40, max_price: 70)
+      expect(result).to include(@item1, @item2, @item3, @item5)
+      expect(result).not_to include(@item4)
+    end
+
+    it 'returns items greater than or equal to the min_price' do
+      result = Item.find_by_price(min_price: 50)
+      expect(result).to include(@item1, @item2, @item3)
+      expect(result).not_to include(@item4, @item5)
+    end
+    
+    it 'returns items less than or equal to the max_price' do
+      result = Item.find_by_price(max_price: 60)
+      expect(result).to include(@item4, @item5, @item3)
+      expect(result).not_to include(@item1, @item2)
+    end
+
+    it 'returns all items' do
+      result = Item.find_by_price({})
+      expect(result).to include(@item1, @item2, @item3, @item4, @item5)
+    end
+
+    it 'returns an empty array' do
+      result = Item.find_by_price(min_price: 100)
+      expect(result).to be_empty
+    end
+  end
 end

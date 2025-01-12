@@ -1,4 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
+    before_action :validate_price_params, only: [:find_all]
 
     def index
         if params[:sorted] == "price"
@@ -31,7 +32,29 @@ class Api::V1::ItemsController < ApplicationController
         item.destroy
     end
 
-
+    def find_all
+        if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
+            raise InvalidPriceParamsError, 'Cannot search by name and price range simultaneously'
+        end
+      
+        if (params[:min_price].present? && !valid_number?(params[:min_price])) || (params[:max_price].present? && !valid_number?(params[:max_price]))
+            raise InvalidPriceParamsError, 'Price must be a valid number'
+        end
+    
+        items = if params[:name].present?
+                    Item.find_by_name(params[:name])
+                elsif params[:min_price].present? || params[:max_price].present?
+                    Item.find_by_price(params)
+                else
+                    Item.all
+                end
+    
+        render json: ItemSerializer.format_items(items), status: :ok
+    end
+    
+      
+      
+      
 
     private
 
@@ -39,4 +62,8 @@ class Api::V1::ItemsController < ApplicationController
         params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
     end
 
+    def valid_number?(value)
+        !!Float(value) rescue false
+    end
+      
 end
