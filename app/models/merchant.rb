@@ -12,7 +12,7 @@ class Merchant < ApplicationRecord
     joins(:invoices).where(invoices: { status: 'returned' }).distinct
   end
 
-  def self.fetch_all_items(merchantData)
-    Item.where(merchant_id: merchantData.id)
+  def self.fetch_all_items(merchant_data)
+    Item.where(merchant_id: merchant_data.id)
   end
 end
