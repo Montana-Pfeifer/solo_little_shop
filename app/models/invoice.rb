@@ -9,6 +9,7 @@ class Invoice < ApplicationRecord
   validates :merchant_id, presence: true
   validates :status, presence: true
 
+
   def self.find_all_invoices(merchant)
     Invoice.where(merchant_id: merchant.id)
   end
