@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
 
   private
 
-   def bad_request(exception)
+  def bad_request(exception)
     render json: ErrorSerializer.format_error(400, exception.message, "Bad Request"), status: :bad_request
   end
 
