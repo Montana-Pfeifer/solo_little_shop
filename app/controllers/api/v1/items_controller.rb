@@ -2,12 +2,12 @@ class Api::V1::ItemsController < ApplicationController
     before_action :validate_price_params, only: [:find_all]
 
     def index
-        if params[:sorted] == "unit_price"
+        if params[:sorted] == "price"
             items = Item.sort_by_price
             render json:ItemSerializer.format_items(items)
-        else
-        items = Item.all 
-        render json: ItemSerializer.format_items(items)
+        else 
+            items = Item.all
+            render json:ItemSerializer.format_items(items)
         end
     end
 

@@ -28,7 +28,7 @@ class Item < ApplicationRecord
   end  
   
   def self.sort_by_price()
-    Item.order(:unit_price)
+      Item.order(:unit_price)
   end
 
   def self.fetch_merchant(item)
