@@ -171,6 +171,28 @@ RSpec.describe "Items API", type: :request do
             expect(item.unit_price).to eq(70.00)
 
         end
+
+        it 'returns error when provided invalid merchant id on update of item' do
+
+            old_name = @item1.name
+
+            new_params = {
+                name: "Rep crew",
+                description: "I'm on my Vigilante Shit again",
+                unit_price: 70.00,
+                merchant_id: 99999999999999
+            }
+
+            put "/api/v1/items/#{@item1.id}", params: { item: new_params}
+            item = Item.find_by(id: @item1.id)
+
+            expect(response.status).to eq(404)
+            expect(item.name).to eq(old_name)
+            expect(item.description).to eq("I cry a lot but I am so productive")
+            expect(item.unit_price).to eq(65.00)
+            expect(item.merchant_id).to eq(@merchant.id)
+
+        end
     end
 
     describe 'DELETE /api/v1/items/:id' do
