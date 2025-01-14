@@ -19,4 +19,5 @@ class Merchant < ApplicationRecord
   def self.find_by_name(name)
     where('name ILIKE ?', "%#{name}%")
   end
+
 end

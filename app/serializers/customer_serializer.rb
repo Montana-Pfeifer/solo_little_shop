@@ -9,7 +9,8 @@ class CustomerSerializer
         attributes: {
           first_name: customer.first_name,
           last_name: customer.last_name
-        }}
+        }
+      }
     end
     }
   end
