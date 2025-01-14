@@ -4,7 +4,7 @@ class ErrorSerializer
       message: "There were errors processing your request",
       errors: errors.map do |error|
         {
-          status: error[:status],
+          status: error[:status].to_s,
           title: error[:title],
           detail: error[:detail]
         }
