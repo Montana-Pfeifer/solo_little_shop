@@ -23,6 +23,9 @@ class Api::V1::ItemsController < ApplicationController
 
     def update
         item = Item.find(params[:id])
+        if !item_params[:merchant_id].nil?
+            merchant = Merchant.find(item_params[:merchant_id])
+        end
         item.update!(item_params)
         render json: ItemSerializer.format_item(item)
     end
@@ -35,26 +38,23 @@ class Api::V1::ItemsController < ApplicationController
     def find_all
         if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
             raise InvalidPriceParamsError, 'Cannot search by name and price range simultaneously'
-        end
-      
-        if (params[:min_price].present? && !valid_number?(params[:min_price])) || (params[:max_price].present? && !valid_number?(params[:max_price]))
+
+        elsif (params[:min_price].present? && !valid_number?(params[:min_price])) || (params[:max_price].present? && !valid_number?(params[:max_price]))
             raise InvalidPriceParamsError, 'Price must be a valid number'
+        
+        else
+            items = if params[:name].present?
+                        Item.find_by_name(params[:name])
+                    elsif params[:min_price].present? || params[:max_price].present?
+                        Item.find_by_price(params)
+                    else
+                        Item.all
+                    end
         end
-    
-        items = if params[:name].present?
-                    Item.find_by_name(params[:name])
-                elsif params[:min_price].present? || params[:max_price].present?
-                    Item.find_by_price(params)
-                else
-                    Item.all
-                end
     
         render json: ItemSerializer.format_items(items), status: :ok
     end
     
-      
-      
-      
 
     private
 
@@ -65,5 +65,4 @@ class Api::V1::ItemsController < ApplicationController
     def valid_number?(value)
         !!Float(value) rescue false
     end
-      
 end

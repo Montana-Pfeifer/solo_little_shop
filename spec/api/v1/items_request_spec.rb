@@ -150,7 +150,7 @@ RSpec.describe "Items API", type: :request do
         end
     end
 
-    describe 'PATCH /api/v1/items/:id'do
+    describe 'PUT /api/v1/items/:id'do
         it 'can update an existing item' do
 
             old_name = @item1.name
@@ -161,7 +161,7 @@ RSpec.describe "Items API", type: :request do
                 unit_price: 70.00
             }
 
-            patch "/api/v1/items/#{@item1.id}", params: { item: new_params}
+            put "/api/v1/items/#{@item1.id}", params: { item: new_params}
             item = Item.find_by(id: @item1.id)
 
             expect(response).to be_successful
