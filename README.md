@@ -6,19 +6,97 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+    - Ruby 3.2.2
+    - Rails 7.1.x
 
 * System dependencies
+    - Ruby on Rails
+    - Ruby
+    - PostgreSQL
+    - Postman
+    - Postico 2
+    - Web Browswer (Chrome) - For FE
 
 * Configuration
-
-* Database creation
-
-* Database initialization
+    - Install Ruby:
+        - `rbenv install 3.2.2`
+        - NOTE: If rbenv tells you that the version you supplied is missing or not available, run:
+            - `brew update && brew upgrade ruby-build`
+        - Set Ruby 3.2.2 as the global version on your system by running:
+            - `rbenv global 3.2.2`
+    - Install Ruby on Rails
+        - `gem install rails --version 7.1.3`
+    - Start the server from within the project directory:
+        - `rails server`
+    - API URL:
+        - IPv4:
+            - http://127.0.0.1
+            - Port: 3000
+        - IPV6:
+            - http://[::1]:3000
+            - Port: 3000
+        - Complete Paths:
+            - http://127.0.0.1:3000
+            - http://[::1]:3000
+            - http://localhost:3000
 
 * How to run the test suite
+    - GEMs
+        - "simplecov", require: false
+        - "rspec-rails"
+        - "pry"
+        - "shoulda-matchers"
+        - "pgreset"
+    - Confirm all project GEMS have been installed by running:
+        - `bundle install`
+    - Confirm the correct `rspec-rails` version was installed by running:
+        - `rspec -v`
+        - Expected Output: `rspec-rails 7.1.0`
+    - Run the test suite from the projects home directory:
+        `bundle exec rspec`
 
-* Services (job queues, cache servers, search engines, etc.)
+* Database creation
+    - `rails db:{drop,create,migrate,seed}`
+    - `rails db:schema:dump`
 
-* Deployment instructions
+* Database initialization
+    - Ensure you have `PostgreSQL 14.14` installed.
+    - `rails db:{drop,create,migrate,seed}`
+    - `rails db:schema:dump`
+    - Testing Database Connection:
+        - Start the rails console from the project directory:
+            `rails console`
+        - Run the following command to confirm that all Merchants are being displayed:
+            `Merchant.all`
 
-* ...
+* Available API Requests:
+        - Returns all merchants in the database
+        - Returns all items in the database
+        - Search by merchant's name using query `?name=`
+        - Search by items's name using query `?name=`
+        - Search by merchant's id
+        - Search by item's id
+        - Create a new merchant `{ "name": "new merchant name" }`
+        - Create a new item `{ "name": "item_name", "description": "item_description", "unit_price": item_price, "merchant_id": item_merchant_id }`
+        - Update an existing merchant by id
+        - Update an existing item by id
+        - Delete an existing merchant by id
+        - Delete an existing item by id
+        - Search all items by merchant id
+        - Search merchant by item id
+        - Search customers by merchant id
+        - Search invoices by merchant id
+        - Search items by minimum price `?min_price=`
+        - Search items by maximum price `?max_price=`
+        - Search items by minimum price to maximum price `?max_price=&min_price=`
+
+* Authors:
+    - Natasha Vasquez
+        - [LinkedIn](https://www.linkedin.com/in/natasha-vasquez/)
+        - [Github](https://github.com/nvnatasha)
+    - Montana Pfeifer
+        - [LinkedIn](https://www.linkedin.com/in/montanapfeifer/)
+        - [Github](https://github.com/Montana-Pfeifer)
+    - Matt Haefling
+        - [LinkedIn](https://www.linkedin.com/in/matthew-haefling/)
+        - [Github](https://github.com/mhaefling)
