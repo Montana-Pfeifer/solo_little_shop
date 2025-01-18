@@ -34,4 +34,10 @@ Rails.application.routes.draw do
       delete "/items/:id",          to: "items#destroy"
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      get "/coupons",           to:"coupons#index"
+    end
+  end
 end
