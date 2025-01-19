@@ -33,9 +33,11 @@ class Api::V1::CouponsController < ApplicationController
       return render json: { error: "Cannot deactivate coupon with pending invoices" }, status: :unprocessable_entity
     end
   
-    coupon.update(status: 'inactive')
-  
-    render json: CouponSerializer.format_coupon(coupon), status: :ok
+    if coupon.update(status: false)
+      render json: CouponSerializer.format_coupon(coupon), status: :ok
+    else
+      render json: { error: "Failed to deactivate coupon." }, status: :unprocessable_entity
+    end
   end
 
 
