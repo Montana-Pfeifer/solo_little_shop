@@ -12,7 +12,7 @@ class CouponSerializer
             code: coupon.code,
             discount_type: coupon.discount_type,
             value: coupon.value,
-            status: coupon.status,
+            status: coupon.status ? "active" : "inactive",
             merchant: coupon.merchant_id.to_s,
             usage_count: coupon.invoices.count.to_s
           }
@@ -31,7 +31,7 @@ class CouponSerializer
           code: coupon.code,
           discount_type: coupon.discount_type,
           value: coupon.value,
-          status: coupon.status,
+          status: coupon.status ? "active" : "inactive",
           merchant_id: coupon.merchant_id.to_s,
           usage_count: coupon.invoices.count.to_s
         }
