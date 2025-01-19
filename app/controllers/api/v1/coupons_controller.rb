@@ -26,6 +26,18 @@ class Api::V1::CouponsController < ApplicationController
    
   end
 
+  def deactivate
+    coupon = Coupon.find(params[:id])
+  
+    if coupon.invoices.where(status: 'pending').exists?
+      return render json: { error: "Cannot deactivate coupon with pending invoices" }, status: :unprocessable_entity
+    end
+  
+    coupon.update(status: 'inactive')
+  
+    render json: CouponSerializer.format_coupon(coupon), status: :ok
+  end
+
 
   private
 
