@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   get "/api/v1/merchants/:merchant_id/customers", to: "api/v1/customers#index"
   get "/api/v1/merchants/:merchant_id/invoices",  to: "api/v1/invoices#index"
 
+  # Project vvvvvvvvvvv
+  get "/api/v1/merchants/:merchant_id/coupons", to: "api/v1/coupons#index"
+  post "/api/v1/merchants/:merchant_id/coupons", to: "api/v1/coupons#create"
+
+
   namespace :api do
     namespace :v1 do
       get "/items",                 to: "items#index"
@@ -38,6 +43,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "/coupons",           to:"coupons#index"
+      get "/coupons/:id",       to:"coupons#show"
+      post "/coupons",          to:"coupons#create"
     end
   end
 end
