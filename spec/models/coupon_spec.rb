@@ -65,5 +65,21 @@ RSpec.describe Coupon, type: :model do
       expect(new_coupon).not_to be_valid
       expect(new_coupon.errors.full_messages).to include("Merchant cannot have more than 5 coupons")
     end
+
+    it "validates uniqueness of coupon code scoped to the merchant" do
+      duplicate_coupon = Coupon.new(name: "Discount 1", code: "SAVE10", discount_type: "percentage", value: 10, merchant: @merchant)
+      duplicate_coupon.valid?
+
+      expect(duplicate_coupon).not_to be_valid
+      expect(duplicate_coupon.errors.full_messages).to include("Code has already been taken for this merchant")
+    end
+
+    it "allows duplicate coupon codes for different merchants" do
+      other_merchant = Merchant.create!(name: "Other Merchant")
+      valid_coupon = Coupon.new(name: "Same Code Different Merchant", code: "SAVE10", discount_type: "percentage", value: 15, merchant: other_merchant)
+    
+      expect(valid_coupon).to be_valid
+    end
+    
   end
 end

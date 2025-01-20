@@ -7,7 +7,8 @@ class Coupon < ApplicationRecord
   validates :name, :code, :discount_type, :value, presence: true
   validates :code, uniqueness: { scope: :merchant_id, message: "has already been taken for this merchant" }
   validate :merchant_cannot_have_more_than_five_coupons, on: :create
-
+  validate :coupon_code_unique_for_merchant
+  
   private
 
   def merchant_cannot_have_more_than_five_coupons
