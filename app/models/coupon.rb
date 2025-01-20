@@ -15,4 +15,10 @@ class Coupon < ApplicationRecord
       errors.add(:merchant, "cannot have more than 5 coupons")
     end
   end
+
+  def coupon_code_unique_for_merchant
+    if merchant.coupons.exists?(code: code)
+      errors.add(:code, "has already been taken for this merchant")
+    end
+  end
 end
