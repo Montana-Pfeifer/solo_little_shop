@@ -25,14 +25,12 @@ class Api::V1::CouponsController < ApplicationController
   def create
     merchant = Merchant.find(params[:merchant_id])
     new_coupon = merchant.coupons.create(coupon_params)
-
   
     if new_coupon.persisted?
       render json: CouponSerializer.format_coupon(new_coupon), status: :created
     else
       render json: { error: new_coupon.errors.full_messages }, status: :unprocessable_entity
     end
-   
   end
 
   def deactivate
