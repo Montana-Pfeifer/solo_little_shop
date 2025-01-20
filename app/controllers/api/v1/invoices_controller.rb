@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 class Api::V1::InvoicesController < ApplicationController
 
   def index

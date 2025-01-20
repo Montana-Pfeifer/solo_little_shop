@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   # Project vvvvvvvvvvv
   get "/api/v1/merchants/:merchant_id/coupons",                  to: "api/v1/coupons#index"
+  get "/api/v1/merchants/:merchant_id/coupons/:id",              to: "api/v1/coupons#show"
   post "/api/v1/merchants/:merchant_id/coupons",                 to: "api/v1/coupons#create"
   patch "/api/v1/merchants/:merchant_id/coupons/:id/activate",   to: "api/v1/coupons#activate"
   patch "/api/v1/merchants/:merchant_id/coupons/:id/deactivate", to: "api/v1/coupons#deactivate"
@@ -41,11 +42,4 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
-    namespace :v1 do
-      get "/coupons",           to:"coupons#index"
-      get "/coupons/:id",       to:"coupons#show"
-      post "/coupons",          to:"coupons#create"
-    end
-  end
 end

@@ -1,15 +1,24 @@
 class Api::V1::CouponsController < ApplicationController
-  class Api::V1::CouponsController < ApplicationController
-    def index
-      merchant = Merchant.find_by(id: params[:merchant_id])
-      coupons = merchant.coupons
+  def index
+    merchant = Merchant.find_by(id: params[:merchant_id])
+    coupons = merchant.coupons
       render json: CouponSerializer.format_coupons(coupons)
-    end
   end
   
 
   def show
-    coupon = Coupon.find(params[:id])
+    merchant = Merchant.find_by(id: params[:merchant_id])
+    if merchant.nil?
+      render json: ErrorSerializer.format_error(404, "Merchant not found", "Record Not Found"), status: :not_found
+      return
+    end
+  
+    coupon = Coupon.find_by(id: params[:id])
+    if coupon.nil?
+      render json: ErrorSerializer.format_error(404, "Coupon not found for this merchant.", "Record Not Found"), status: :not_found
+      return
+    end
+    
     render json: CouponSerializer.format_coupon(coupon)
   end
 
@@ -74,5 +83,4 @@ class Api::V1::CouponsController < ApplicationController
   def coupon_params
     params.require(:coupon).permit(:name, :code, :discount_type, :value, :status)
   end
-  
 end

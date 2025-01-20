@@ -14,6 +14,13 @@ class ErrorSerializer
 
   
   def self.format_error(status, detail, title = "Error", message = "An error occurred")
-    format_errors([{ status: status, title: title, detail: detail, message: message }])
+    {
+      error: {
+        status: status.to_s,
+        title: title,
+        detail: detail,
+        message: message
+      }
+    }
   end
 end

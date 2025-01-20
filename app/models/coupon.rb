@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 class Coupon < ApplicationRecord
   belongs_to :merchant
   has_many :invoices
