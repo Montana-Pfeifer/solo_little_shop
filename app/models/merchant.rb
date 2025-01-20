@@ -21,4 +21,8 @@ class Merchant < ApplicationRecord
     where('name ILIKE ?', "%#{name}%")
   end
 
+  def has_reached_coupon_limit?
+    coupons.count >= 5
+  end
+
 end

@@ -25,6 +25,12 @@ Rails.application.routes.draw do
   get "/api/v1/merchants/:merchant_id/customers", to: "api/v1/customers#index"
   get "/api/v1/merchants/:merchant_id/invoices",  to: "api/v1/invoices#index"
 
+  # Project vvvvvvvvvvv
+  get "/api/v1/merchants/:merchant_id/coupons",                  to: "api/v1/coupons#index"
+  post "/api/v1/merchants/:merchant_id/coupons",                 to: "api/v1/coupons#create"
+  patch "/api/v1/merchants/:merchant_id/coupons/:id/activate",   to: "api/v1/coupons#activate"
+  patch "/api/v1/merchants/:merchant_id/coupons/:id/deactivate", to: "api/v1/coupons#deactivate"
+
   namespace :api do
     namespace :v1 do
       get "/items",                 to: "items#index"
@@ -32,6 +38,14 @@ Rails.application.routes.draw do
       post "/items",                to: "items#create"
       put "/items/:id",             to: "items#update"
       delete "/items/:id",          to: "items#destroy"
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      get "/coupons",           to:"coupons#index"
+      get "/coupons/:id",       to:"coupons#show"
+      post "/coupons",          to:"coupons#create"
     end
   end
 end
