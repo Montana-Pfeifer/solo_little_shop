@@ -11,7 +11,11 @@ class Invoice < ApplicationRecord
   validates :status, presence: true
   
   scope :pending, -> { where(status: 'pending') }
-
+  scope :find_shipped_invoices, ->(merchant) { where(merchant: merchant, status: 'shipped') }
+  scope :find_returned_invoices, ->(merchant) { where(merchant: merchant, status: 'returned') }
+  scope :find_packaged_invoices, ->(merchant) { where(merchant: merchant, status: 'packaged') }
+  scope :find_all_invoices, ->(merchant) { where(merchant: merchant) }
+  
   def self.find_all_invoices(merchant)
     Invoice.where(merchant_id: merchant.id)
   end

@@ -69,6 +69,10 @@
           1,
           null,
           1,
+          1,
+          1,
+          1,
+          1,
           null,
           1,
           1,
@@ -233,14 +237,15 @@
       "/Users/montyp/mod2/solo_little_shop/app/controllers/api/v1/invoices_controller.rb": {
         "lines": [
           1,
-          null,
           1,
-          null,
-          1,
-          null,
           6,
           null,
           5,
+          4,
+          4,
+          0,
+          null,
+          null,
           4,
           null,
           1,
@@ -254,6 +259,10 @@
           null,
           null,
           5,
+          1,
+          null,
+          null,
+          4,
           null,
           null
         ]
@@ -263,10 +272,11 @@
           1,
           null,
           1,
-          5,
+          4,
           null,
           null,
           7,
+          null,
           null,
           null,
           null,
@@ -750,6 +760,6 @@
         ]
       }
     },
-    "timestamp": 1737484232
+    "timestamp": 1737485557
   }
 }
