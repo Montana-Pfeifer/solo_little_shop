@@ -6,31 +6,7 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require "simplecov"
-
-SimpleCov.start 'rails' do
-  enable_coverage :branch
-  coverage_dir "coverage/#{ENV['TEST_ENV']}" # Separate coverage reports for models and requests
-  
-  add_filter '/spec/' # Always exclude spec files
-
-  if ENV['TEST_ENV'] == 'models'
-    add_filter '/app/controllers/'
-    add_filter '/app/helpers/'
-    add_filter '/app/serializers/'
-    add_filter '/app/services/'
-    add_filter '/app/channels/' # Exclude any other directories not related to models
-    add_group 'Models', 'app/models'
-  elsif ENV['TEST_ENV'] == 'requests'
-    add_filter '/app/models/'
-    add_group 'Requests', 'app/controllers'
-  end
-end
-
-RSpec.configure do |config|
-  config.before(:suite) do
-    puts "Running tests from: #{config.files_to_run}"
-  end
-end
+SimpleCov.start
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

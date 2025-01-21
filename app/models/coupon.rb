@@ -1,11 +1,9 @@
-require 'rails_helper'
-
 class Coupon < ApplicationRecord
   belongs_to :merchant
   has_many :invoices
 
   validates :name, :code, :discount_type, :value, presence: true
-  validates :code, uniqueness: { scope: :merchant_id, message: "has already been taken for this merchant" }
+  validates :code, uniqueness: { scope: :merchant_id}
   validate :merchant_cannot_have_more_than_five_coupons, on: :create
   validate :coupon_code_unique_for_merchant
   
@@ -18,7 +16,7 @@ class Coupon < ApplicationRecord
   end
 
   def coupon_code_unique_for_merchant
-    if merchant.coupons.exists?(code: code)
+    if merchant && merchant.coupons.where.not(id: id).exists?(code: code)
       errors.add(:code, "has already been taken for this merchant")
     end
   end

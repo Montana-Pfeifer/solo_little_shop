@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from InvalidPriceError, with: :handle_invalid_price_params
   rescue_from InvalidPriceParamsError, with: :handle_invalid_price_params
-
+  rescue_from InvalidCouponStatusError, with: :handle_invalid_coupon_status
 
   private
 
@@ -35,5 +35,9 @@ class ApplicationController < ActionController::API
 
   def handle_invalid_price_params(exception)
     render json: ErrorSerializer.format_error(400, exception.message, "Invalid Price Range"), status: :bad_request
+  end
+
+  def handle_invalid_coupon_status(exception)
+    render json: ErrorSerializer.format_error(422, exception.message, "Unprocessable Entity"), status: :unprocessable_entity
   end
 end

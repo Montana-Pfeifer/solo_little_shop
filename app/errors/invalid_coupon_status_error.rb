@@ -1,0 +1,3 @@
+class InvalidCouponStatusError < StandardError
+ 
+end
