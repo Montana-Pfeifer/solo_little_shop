@@ -1,6 +1,8 @@
 class Api::V1::MerchantsController < ApplicationController
 
   def index
+    merchants = Merchant.includes(:coupons, :invoices)
+
     if params[:sorted] == 'age'
       merchants = Merchant.merchants_by_age
       render json: MerchantSerializer.format_merchants(merchants)
@@ -34,6 +36,7 @@ class Api::V1::MerchantsController < ApplicationController
 
   def destroy
     Merchant.find(params[:id]).destroy
+
   end
    
   def find

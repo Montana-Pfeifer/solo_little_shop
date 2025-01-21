@@ -1,6 +1,6 @@
 class Coupon < ApplicationRecord
   belongs_to :merchant
-  has_many :invoices
+  has_many :invoices, dependent: :destroy
 
   validates :name, :code, :discount_type, :value, presence: true
   validates :code, uniqueness: { scope: :merchant_id}
