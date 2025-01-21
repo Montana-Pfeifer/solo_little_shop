@@ -1,9 +1,25 @@
 class Api::V1::CouponsController < ApplicationController
   def index
-    merchant = Merchant.find_by(id: params[:merchant_id])
-    coupons = merchant.coupons
-    render json: CouponSerializer.format_coupons(coupons)
+    merchant = Merchant.find(params[:merchant_id])
+  
+    if params[:status].present?
+      coupons = Coupon.filter_by_status(merchant, params[:status])
+  
+      if coupons.nil? || coupons.empty?
+        raise ActiveRecord::RecordNotFound, "No coupons found for this status."
+      end
+      
+    else
+      coupons = merchant.coupons
+    end
+  
+    if coupons.empty?
+      raise ActiveRecord::RecordNotFound, "Coupon not found for this merchant."
+    end
+  
+    render json: CouponSerializer.format_coupons(coupons), status: :ok
   end
+  
 
   def show
     merchant = Merchant.find_by(id: params[:merchant_id])
@@ -31,37 +47,29 @@ class Api::V1::CouponsController < ApplicationController
     coupon = merchant.coupons.find_by(id: params[:id])
     raise ActiveRecord::RecordNotFound, "Coupon not found for this merchant." if coupon.nil?
   
-    if coupon.status == "inactive"
-      raise InvalidCouponStatusError, "Coupon is already inactive."
-    end
+    validate_coupon_for_deactivation(coupon)
   
-    if coupon.invoices.pending.exists?
-      raise InvalidCouponStatusError, "Cannot deactivate coupon with pending invoices."
-    end
+    coupon.update!(status: false)
   
-    coupon.update!(status: "inactive")
     render json: CouponSerializer.format_coupon(coupon), status: :ok
   end
   
-
   def activate
     merchant = Merchant.find(params[:merchant_id])
     coupon = merchant.coupons.find_by(id: params[:id])
     raise ActiveRecord::RecordNotFound, "Coupon not found for this merchant." if coupon.nil?
   
-    if coupon.status == "active"
-      raise InvalidCouponStatusError, "Coupon is already active."
-    end
+    validate_coupon_for_activation(coupon)
   
-    if coupon.invoices.pending.exists?
-      raise InvalidCouponStatusError, "Cannot activate coupon with pending invoices."
-    end
-
-    coupon.update!(status: "active")
+    coupon.update!(status: true)
     render json: CouponSerializer.format_coupon(coupon), status: :ok
   end
   
   
+  
+  
+
+
 
   private
 

@@ -83,25 +83,26 @@ RSpec.describe "Coupons API", type: :request do
       }
 
       expect(response.status).to eq(422)
+
       response_data = JSON.parse(response.body, symbolize_names: true)
-      expect(response_data[:errors][:detail]).to eq("Code has already been taken for this merchant")
+      expect(response_data[:error][:detail]).to eq("Validation failed: Code has already been taken")
     end
   end
 
   describe "PATCH /api/v1/merchants/:merchant_id/coupons/:id/activate" do
     it "activates a coupon" do
       patch "/api/v1/merchants/#{@merchant.id}/coupons/#{@inactive_coupon.id}/activate"
-
+  
       expect(response).to be_successful
       expect(response.status).to eq(200)
-
+  
       response_data = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(response_data[:attributes][:status]).to eq("active")
     end
 
     it "returns an error if the coupon is already active" do
       patch "/api/v1/merchants/#{@merchant.id}/coupons/#{@active_coupon.id}/activate"
-
+  
       expect(response.status).to eq(422)
       response_data = JSON.parse(response.body, symbolize_names: true)
       expect(response_data[:error][:detail]).to eq("Coupon is already active.")
@@ -116,15 +117,18 @@ RSpec.describe "Coupons API", type: :request do
       expect(response.status).to eq(200)
 
       response_data = JSON.parse(response.body, symbolize_names: true)[:data]
-      expect(response_data[:attributes][:status]).to eq(false)
+      expect(response_data[:attributes][:status]).to eq("inactive")
     end
 
     it "returns a 422 error with the message 'Coupon is already inactive.'" do
       patch "/api/v1/merchants/#{@merchant.id}/coupons/#{@inactive_coupon.id}/deactivate"
-
+    
       expect(response.status).to eq(422)
-      expect(response_data[:errors][:detail]).to eq("Coupon is already inactive.")
+      response_data = JSON.parse(response.body, symbolize_names: true)
+    
+      expect(response_data[:error][:detail]).to eq("Coupon is already inactive.")
     end
+    
   
 
     it "returns an error if there are pending invoices" do
@@ -132,7 +136,40 @@ RSpec.describe "Coupons API", type: :request do
 
       expect(response.status).to eq(422)
       response_data = JSON.parse(response.body, symbolize_names: true)
-      expect(response_data[:errors][:detail]).to eq("Cannot deactivate coupon with pending invoices.")
+      expect(response_data[:error][:detail]).to eq("Cannot deactivate coupon with pending invoices.")
+    end
+  end
+
+  describe "GET /api/v1/merchants/:merchant_id/coupons/filtered" do
+
+    it "returns active coupons when filtered by active status" do
+      get "/api/v1/merchants/#{@merchant.id}/coupons?status=active"
+      response_data = JSON.parse(response.body)
+      expect(response).to be_successful
+      expect(response_data['data'].size).to eq(1)
+      expect(response_data['data'].first['attributes']['status']).to eq('active')
+    end
+  
+    it "returns inactive coupons when filtered by inactive status" do
+      get "/api/v1/merchants/#{@merchant.id}/coupons?status=inactive"
+      response_data = JSON.parse(response.body)
+      expect(response).to be_successful
+      expect(response_data['data'].size).to eq(1)
+      expect(response_data['data'].first['attributes']['status']).to eq('inactive')
+    end
+  
+    it "returns all coupons when no status is provided" do
+      get "/api/v1/merchants/#{@merchant.id}/coupons"
+      response_data = JSON.parse(response.body)
+      expect(response).to be_successful
+      expect(response_data['data'].size).to eq(2)
+    end
+  
+    it "returns an error for invalid status" do
+      get "/api/v1/merchants/#{@merchant.id}/coupons?status=invalid"
+      parsed_response = JSON.parse(response.body)
+      expect(response).to have_http_status(:not_found)
+      expect(parsed_response['error']['detail']).to eq("No coupons found for this status.")
     end
   end
 end

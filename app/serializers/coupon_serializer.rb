@@ -1,6 +1,6 @@
 class CouponSerializer
 
-  def self.format_coupons(coupons)
+  def self.format_coupons(coupons, include_meta = true)
     {  
       data:
       coupons.map do |coupon|
