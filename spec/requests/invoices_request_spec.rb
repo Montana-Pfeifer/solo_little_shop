@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe "Invoices API", type: :request do
   before(:each) do
     @merchant_one = Merchant.create!(name: 'Matt\'s Computer Repair Store')
@@ -91,6 +89,14 @@ RSpec.describe "Invoices API", type: :request do
 
         invoices = JSON.parse(response.body, symbolize_names: true)[:data]
         expect(invoices.count).to eq(0)
+      end
+
+      it 'returns a 422 error if an invalid status is provided' do
+        get "/api/v1/merchants/#{@merchant_one.id}/invoices?status=invalid_status"
+
+        expect(response.status).to eq(422)
+        response_data = JSON.parse(response.body, symbolize_names: true)
+        expect(response_data[:error]).to eq("Invalid status parameter")
       end
     end
 

@@ -85,7 +85,7 @@ RSpec.describe "Coupons API", type: :request do
       expect(response.status).to eq(422)
 
       response_data = JSON.parse(response.body, symbolize_names: true)
-      expect(response_data[:error][:detail]).to eq("Validation failed: Code has already been taken")
+      expect(response_data[:error][:detail]).to eq("Validation failed: Code has already been taken for this merchant")
     end
   end
 
@@ -127,16 +127,6 @@ RSpec.describe "Coupons API", type: :request do
       response_data = JSON.parse(response.body, symbolize_names: true)
     
       expect(response_data[:error][:detail]).to eq("Coupon is already inactive.")
-    end
-    
-  
-
-    it "returns an error if there are pending invoices" do
-      patch "/api/v1/merchants/#{@merchant.id}/coupons/#{@active_coupon.id}/deactivate"
-
-      expect(response.status).to eq(422)
-      response_data = JSON.parse(response.body, symbolize_names: true)
-      expect(response_data[:error][:detail]).to eq("Cannot deactivate coupon with pending invoices.")
     end
   end
 

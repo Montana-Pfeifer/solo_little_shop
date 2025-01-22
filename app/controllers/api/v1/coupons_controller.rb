@@ -8,13 +8,9 @@ class Api::V1::CouponsController < ApplicationController
       if coupons.nil? || coupons.empty?
         raise ActiveRecord::RecordNotFound, "No coupons found for this status."
       end
-      
+
     else
       coupons = merchant.coupons
-    end
-  
-    if coupons.empty?
-      raise ActiveRecord::RecordNotFound, "Coupon not found for this merchant."
     end
   
     render json: CouponSerializer.format_coupons(coupons), status: :ok
