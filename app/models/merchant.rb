@@ -5,7 +5,7 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
-  def self.merchants_by_age()
+  def self.merchants_by_age
     Merchant.order(created_at: 'desc')
   end
 

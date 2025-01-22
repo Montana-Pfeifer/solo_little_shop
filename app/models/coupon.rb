@@ -3,7 +3,7 @@ class Coupon < ApplicationRecord
   has_many :invoices, dependent: :destroy
 
   validates :name, :code, :discount_type, :value, presence: true
-  validates :code, uniqueness: { scope: :merchant_id}
+  validates :code, uniqueness: { scope: :merchant_id, message: "has already been taken for this merchant" }
   validate :merchant_cannot_have_more_than_five_coupons, on: :create
   
   scope :active, -> { where(status: true) }

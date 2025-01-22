@@ -5,8 +5,9 @@ RSpec.describe Coupon, type: :model do
     @customer = Customer.create!(first_name: "John", last_name: "Doe")
 
     @merchant = Merchant.create!(name: "Test Merchant")
-    @coupon1 = Coupon.create!(name: "Discount 1", code: "SAVE10", discount_type: "percentage", value: 10, merchant: @merchant)
-    @coupon2 = Coupon.create!(name: "Discount 2", code: "SAVE20", discount_type: "fixed", value: 20, merchant: @merchant)
+    @coupon1 = Coupon.create!(name: "Discount 1", code: "SAVE10", discount_type: "percentage", value: 10, merchant: @merchant, status: true)
+    @coupon2 = Coupon.create!(name: "Discount 2", code: "SAVE20", discount_type: "fixed", value: 20, merchant: @merchant, status: false)
+
 
     @invoice1 = Invoice.create!(merchant: @merchant, coupon: @coupon1, customer: @customer, status: "pending")
     @invoice2 = Invoice.create!(merchant: @merchant, coupon: @coupon2, customer: @customer, status: "completed")
@@ -39,7 +40,7 @@ RSpec.describe Coupon, type: :model do
       duplicate_coupon = Coupon.new(name: "Duplicate Discount", code: "SAVE10", discount_type: "percentage", value: 15, merchant: @merchant)
 
       expect(duplicate_coupon).not_to be_valid
-      expect(duplicate_coupon.errors.full_messages).to include("Code has already been taken for this merchant")
+      expect(duplicate_coupon.errors.full_messages[0]).to eq("Code has already been taken for this merchant")
     end
   end
 
@@ -63,7 +64,7 @@ RSpec.describe Coupon, type: :model do
       new_coupon = Coupon.new(name: "Excess Discount", code: "EXCESS", discount_type: "fixed", value: 5, merchant: @merchant)
 
       expect(new_coupon).not_to be_valid
-      expect(new_coupon.errors.full_messages).to include("Merchant cannot have more than 5 coupons")
+      expect(new_coupon.errors.full_messages[0]).to eq("Merchant cannot have more than five coupons.")
     end
 
     it "validates uniqueness of coupon code scoped to the merchant" do
@@ -71,7 +72,7 @@ RSpec.describe Coupon, type: :model do
       duplicate_coupon.valid?
 
       expect(duplicate_coupon).not_to be_valid
-      expect(duplicate_coupon.errors.full_messages).to include("Code has already been taken for this merchant")
+      expect(duplicate_coupon.errors.full_messages[0]).to eq("Code has already been taken for this merchant")
     end
 
     it "allows duplicate coupon codes for different merchants" do
@@ -81,5 +82,22 @@ RSpec.describe Coupon, type: :model do
       expect(valid_coupon).to be_valid
     end
     
+    
+    it "returns active coupons for the merchant" do
+      active_coupons = Coupon.filter_by_status(@merchant, 'active')
+      expect(active_coupons).to include(@coupon1)
+      expect(active_coupons).not_to include(@coupon2)
+    end
+
+    it "returns inactive coupons for the merchant" do
+      inactive_coupons = Coupon.filter_by_status(@merchant, 'inactive')
+      expect(inactive_coupons).to include(@coupon2)
+      expect(inactive_coupons).not_to include(@coupon1)
+    end
+
+    it "returns nil for an invalid status" do
+      invalid_status = Coupon.filter_by_status(@merchant, 'invalid')
+      expect(invalid_status).to be_nil
+    end
   end
 end
