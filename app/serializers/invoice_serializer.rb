@@ -9,7 +9,8 @@ class InvoiceSerializer
           attributes: {
             customer_id: invoice.customer_id,
             merchant_id: invoice.merchant_id,
-            status: invoice.status
+            status: invoice.status,
+            coupon_id: invoice.coupon_id
           }
         }
       end

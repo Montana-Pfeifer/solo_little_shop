@@ -1,11 +1,11 @@
 class Merchant < ApplicationRecord
-  has_many :invoices, dependent: :destroy
+  has_many :invoices
   has_many :items, dependent: :destroy
-  has_many :coupons
+  has_many :coupons, dependent: :destroy
 
   validates :name, presence: true
 
-  def self.merchants_by_age()
+  def self.merchants_by_age
     Merchant.order(created_at: 'desc')
   end
 

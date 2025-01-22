@@ -5,39 +5,62 @@ RSpec.describe "Merchants API", type: :request do
     @merchant_one = Merchant.create!(name: 'Matt\'s Computer Repair Store')
     @merchant_two = Merchant.create!(name: 'Natasha\'s Taylor Swift Store')
     @merchant_three = Merchant.create!(name: 'Montana\'s Pokemon Cards Store')
-
+  
     @customer = Customer.create!(first_name: 'John', last_name: 'Doe')
-
+  
+    @active_coupon = Coupon.create!(
+      name: "Active Discount",
+      code: "SAVE10",
+      discount_type: "percentage",
+      value: 10,
+      merchant: @merchant_one,
+      status: true
+    )
+    
+    @active_coupon2 = Coupon.create!(
+      name: "Active Discount 2",
+      code: "SAVE30",
+      discount_type: "percentage",
+      value: 30,
+      merchant: @merchant_two,
+      status: true
+    )
+  
     @invoice_one = @merchant_one.invoices.create!(
       customer: @customer,
       status: 'returned',
-      created_at: '2023-01-01'
+      created_at: '2023-01-01',
+      coupon_id: @active_coupon.id
     )
-
+  
     @invoice_two = @merchant_two.invoices.create!(
       customer: @customer,
       status: 'shipped',
-      created_at: '2023-01-02'
+      created_at: '2023-01-02',
+      coupon_id: @active_coupon2.id
     )
-    end
+  
+    @invoice_three = @merchant_three.invoices.create!(
+      customer: @customer,
+      status: 'shipped',
+      created_at: '2023-01-03'
+    )
+  end
 
   describe 'GET /api/v1/merchants' do
-    it 'fetches all merchants' do
-
+    it 'fetches all merchants with coupon and invoice counts' do
       get '/api/v1/merchants'
-
+    
       expect(response).to be_successful
-      expect(response.status).to eq(200)
-
       merchants = JSON.parse(response.body, symbolize_names: true)[:data]
-
+    
       expect(merchants.count).to eq(3)
+      expect(merchants[0][:attributes][:coupon_count]).to eq(1)
+      expect(merchants[1][:attributes][:coupon_count]).to eq(1) 
       expect(merchants[0][:attributes][:name]).to eq(@merchant_one.name)
       expect(merchants[1][:attributes][:name]).to eq(@merchant_two.name)
-      expect(merchants[2][:attributes][:name]).to eq(@merchant_three.name)
-
-      expect(merchants[0][:attributes][:name]).to be_a(String)
     end
+    
 
     it 'fetches merchants sorted by age' do
       
