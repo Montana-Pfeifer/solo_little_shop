@@ -56,8 +56,9 @@ Things you may want to cover:
         `bundle exec rspec`
 
 * Database creation
-    - `rails db:{drop,create,migrate,seed}`
-    - `rails db:schema:dump`
+       rails db:{drop,create}
+       rails runner ActiveRecord::Tasks::DatabaseTasks.load_seed
+       rails db:migrate
 
 * Database initialization
     - Ensure you have `PostgreSQL 14.14` installed.
@@ -90,13 +91,8 @@ Things you may want to cover:
         - Search items by maximum price `?max_price=`
         - Search items by minimum price to maximum price `?max_price=&min_price=`
 
-* Authors:
-    - Natasha Vasquez
-        - [LinkedIn](https://www.linkedin.com/in/natasha-vasquez/)
-        - [Github](https://github.com/nvnatasha)
+* Author:
+
     - Montana Pfeifer
         - [LinkedIn](https://www.linkedin.com/in/montanapfeifer/)
         - [Github](https://github.com/Montana-Pfeifer)
-    - Matt Haefling
-        - [LinkedIn](https://www.linkedin.com/in/matthew-haefling/)
-        - [Github](https://github.com/mhaefling)
