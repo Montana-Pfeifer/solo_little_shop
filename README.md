@@ -62,8 +62,9 @@ Things you may want to cover:
 
 * Database initialization
     - Ensure you have `PostgreSQL 14.14` installed.
-    - `rails db:{drop,create,migrate,seed}`
-    - `rails db:schema:dump`
+    - rails db:{drop,create}
+        rails runner ActiveRecord::Tasks::DatabaseTasks.load_seed
+        rails db:migrate
     - Testing Database Connection:
         - Start the rails console from the project directory:
             `rails console`
