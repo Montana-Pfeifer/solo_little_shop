@@ -37,7 +37,7 @@ class Api::V1::CouponsController < ApplicationController
       raise ActiveRecord::RecordInvalid.new(new_coupon)
     end
   end
-
+#vvvvvvvvv merge to update vvvvvvvvvvvv
   def deactivate
     merchant = Merchant.find(params[:merchant_id])
     coupon = merchant.coupons.find_by(id: params[:id])
